@@ -8,6 +8,7 @@ var config = {
     testing: {
         port:8080,
         database:{
+            url: process.env.DATABASE_URL
         }
     }
 };
