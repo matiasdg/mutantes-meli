@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "NODE_ENV=testing node index.js",
-    "start": "PGUSER=matias PGPASSWORD=daniel NODE_ENV=testing node index.js"
+    "start": "NODE_ENV=testing node index.js"
   },
   "author": "",
   "license": "ISC",
