@@ -1,5 +1,5 @@
 var express = require('express');
-var port = require('./config/app.config.js').get(process.env.NODE_ENV).port;
+var port = ( process.env.PORT || require('./config/app.config.js').get(process.env.NODE_ENV).port);
 //var router = require('./routes/router.js');
 //var healthChecker = require('./models/healthChecker.js');
 
