@@ -2,6 +2,7 @@ var config = {
     default: {
         port:8010,
         database:{
+          url: process.env.DATABASE_URL
         }
     },
     testing: {
