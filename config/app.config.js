@@ -1,12 +1,12 @@
 var config = {
     default: {
-        port:8010,
+        port:(process.env.PORT || 8010),
         database:{
           url: process.env.DATABASE_URL
         }
     },
-    testing: {
-        port:8080,
+    production: {
+        port:(process.env.PORT || 8080),
         database:{
             url: process.env.DATABASE_URL
         }
