@@ -1,7 +1,20 @@
-var config = require('./config/app.config.js').get(process.env.NODE_ENV);
-const { Pool } = require('pg');
+var config = require('../config/app.config.js').get(process.env.NODE_ENV);
+const Sequelize = require('sequelize');
 
-const pool = new Pool({
-  connectionString: config.database.url,
-  ssl: true
+var sequelize = new Sequelize(config.database.url, {
+  dialect: 'postgres',
+  dialectOptions: {
+    ssl: true
+  }
 });
+
+
+sequelize.authenticate()
+    .then(() => {
+  console.log('Connection has been established successfully.');
+})
+.catch(err => {
+  console.error('Unable to connect to the database:', err);
+});
+
+module.exports = sequelize;

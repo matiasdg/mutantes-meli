@@ -11,3 +11,4 @@ app.listen(port, function(){
   console.log('Servidor corriendo en el puerto: ' + port + '. Ambiente: ' + process.env.NODE_ENV);
 });
 
+module.exports = app;

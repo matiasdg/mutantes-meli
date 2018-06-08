@@ -1,14 +1,43 @@
 var express = require('express');
 
-var xMen = require('../models/xMen.model');
+var xMenCore = require('../core/xMen.core');
+var Stat = require('../models/stat.model');
+
 
 exports.mutant = function(req, res) {
 
   var body = req.body;
+  //validar
 
-  xMen.isMutant(body.dna, function(response){
+  xMenCore.isMutant(body.dna, function(response){
 	
-	res.status(200).send(response);
+	if(response.isMutant)
+	  res.status(200).send(response);
+	else
+	  res.status(403);
+
+	Stat.findOne().then(stat => {
+	  if (stat) {
+		var newCountMutantDna = stat.countMutantDna;
+		var newCountHumanDna = stat.countHumanDna;
+		var newRatio = stat.ratio;
+
+		if(response.isMutant)
+		  newCountMutantDna++;
+		else
+		  newCountHumanDna++;
+
+		newRatio = newCountMutantDna / newCountHumanDna;
+
+		stat.update({
+		  countMutantDna: newCountMutantDna,
+		  countHumanDna: newCountHumanDna,
+		  ratio: newRatio
+		}).then(function () {
+			console.log("Stats updated")
+		})
+	  }
+	});
 
   }, function(error){
 	res.send('Error: ', error);
@@ -16,26 +45,9 @@ exports.mutant = function(req, res) {
 
 };
 
-exports.mutantTest = function(req, res) {
-  
-/*  try {
-	const client = await pool.connect();
-	const result = await client.query('SELECT * FROM test_table');
-	console.log(result);
-	res.send(result);
-	client.release();
-  } catch (err) {
-	console.error(err);
-	res.send("Error " + err);
-  }*/
-
-};
-
 exports.stats = function(req, res) {
 
-  xMen.getStats(function(response){
-	res.send(response);
-  }, function(error){
-	res.send("Error " + err);
+  Stat.findOne().then(s => {
+	res.send(s);
   });
 };
