@@ -1,7 +1,6 @@
-var express = require('express');
-
 var xMenCore = require('../core/xMen.core');
-var Stat = require('../models/stat.model');
+var xMenService = require('../services/xMen.service');
+var statService = require('../services/stat.service');
 
 exports.mutant = function(req, res) {
 
@@ -15,38 +14,21 @@ exports.mutant = function(req, res) {
 	else
 	  res.status(403).send(response);
 
-	Stat.findOne().then(stat => {
-	  if (stat) {
-		var newCountMutantDna = stat.countMutantDna;
-		var newCountHumanDna = stat.countHumanDna;
-		var newRatio = stat.ratio;
+	statService.update(response.isMutant);
 
-		if(response.isMutant)
-		  newCountMutantDna++;
-		else
-		  newCountHumanDna++;
-
-		newRatio = newCountMutantDna / newCountHumanDna;
-
-		stat.update({
-		  countMutantDna: newCountMutantDna,
-		  countHumanDna: newCountHumanDna,
-		  ratio: newRatio
-		}).then(function () {
-			console.log("Stats updated")
-		})
-	  }
-	});
+	xMenService.save(body.dna, response.isMutant);
 
   }, function(error){
-	res.send('Error: ', error);
+	res.status(500).send(error);
   });
 
 };
 
 exports.stats = function(req, res) {
 
-  Stat.findOne().then(s => {
-	res.send(s);
+  statService.getStat(function(response){
+	res.status(200).send(response);
+  }, function(error){
+	res.status(500).send(error);
   });
 };

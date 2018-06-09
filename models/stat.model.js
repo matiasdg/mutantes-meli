@@ -13,13 +13,13 @@ const Stat = sequelize.define('stat', {
 	}
 });
 
-/*Stat.sync({force: true}).then(() => {
+Stat.sync({force: true}).then(() => {
   // Table created
   return Stat.create({
 	countMutantDna: 0,
 	countHumanDna: 0,
 	ratio: 0
   });
-});*/
+});
 
 module.exports = Stat;
