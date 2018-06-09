@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "nyc mocha --timeout 15000",
+    "test": "echo 'sdfsdf'; nyc --reporter=html --reporter=text mocha --timeout 15000 --exit",
     "start": "NODE_ENV=production node index.js",
     "local": "node index.js"
+
   },
   "author": "",
   "license": "ISC",
