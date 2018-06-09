@@ -34,10 +34,10 @@ $ npm test
 
 #### How to use the app on the cloud
 
-The app is hosted on sarasa.heroku
+The app is hosted on https://mutantes-meli.herokuapp.com
 
 Endpoint for check if a human is mutant or not
-[sarasa.heroku/api/xmen/mutant](sarasa.heroku/api/xmen/mutatant)
+[https://mutantes-meli.herokuapp.com/api/xmen/mutant](https://mutantes-meli.herokuapp.com/api/xmen/mutatant)
 
 Endpoint for get the stats
-[sarasa.heroku/api/xmen/stats](sarasa.heroku/api/xmen/stats)
+[https://mutantes-meli.herokuapp.com/api/xmen/stats](https://mutantes-meli.herokuapp.com/api/xmen/stats)
