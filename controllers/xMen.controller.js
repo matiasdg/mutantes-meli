@@ -3,7 +3,6 @@ var express = require('express');
 var xMenCore = require('../core/xMen.core');
 var Stat = require('../models/stat.model');
 
-
 exports.mutant = function(req, res) {
 
   var body = req.body;
@@ -14,7 +13,7 @@ exports.mutant = function(req, res) {
 	if(response.isMutant)
 	  res.status(200).send(response);
 	else
-	  res.status(403);
+	  res.status(403).send(response);
 
 	Stat.findOne().then(stat => {
 	  if (stat) {
