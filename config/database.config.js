@@ -5,8 +5,13 @@ var sequelize = new Sequelize(config.database.url, {
   dialect: 'postgres',
   dialectOptions: {
     ssl: config.database.ssl
+  },
+  pool:{
+    acquire:50000,
+    max: 6
   }
-});
+}
+);
 
 
 sequelize.authenticate()
