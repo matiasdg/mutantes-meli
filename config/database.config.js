@@ -4,7 +4,7 @@ const Sequelize = require('sequelize');
 var sequelize = new Sequelize(config.database.url, {
   dialect: 'postgres',
   dialectOptions: {
-    ssl: true
+    ssl: config.database.ssl
   }
 });
 

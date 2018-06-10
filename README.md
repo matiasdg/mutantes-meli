@@ -1,9 +1,15 @@
 # mutantes-meli
 
 #### Technologies involved
- - NodeJS
- - Docker
- - Postgres
+ - [NodeJS](https://nodejs.org/es/)
+ - [Postgres](https://www.postgresql.org/)
+ - [Sequelize](http://docs.sequelizejs.com/)
+ - [NPM](https://www.npmjs.com/)
+ - [Mocha](https://mochajs.org/)
+ - [Istanbul](https://istanbul.js.org/)
+ - [Heroku](https://www.heroku.com/)
+ - [Docker](https://www.docker.com/)
+
 
 #### How to run the app locally
 Make sure Docker is installed.
@@ -16,9 +22,9 @@ $ ./run-app.sh
 Make sure NPM is installed.
 ```sh
 $ cd mutantes
-$ ./run-db.sh
+$ sh ./run-db.sh
 $ npm install
-$ npm start
+$ npm run local
 ```
 
 #### How to run tests:

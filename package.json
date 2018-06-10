@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo 'sdfsdf'; nyc --reporter=html --reporter=text mocha --timeout 15000 --exit",
+    "test": "DATABASE_URL=postgres://root:root@localhost:5432/mutantes nyc --reporter=text mocha --timeout 15000 --exit",
     "start": "NODE_ENV=production node index.js",
-    "local": "node index.js"
+    "local": "DATABASE_URL=postgres://root:root@localhost:5432/mutantes node index.js",
+    "docker": "DATABASE_URL=postgres://root:root@mutantes-db:5432/mutantes node index.js"
 
   },
   "author": "",
@@ -14,7 +15,6 @@
   "dependencies": {
     "async": "^2.6.0",
     "body-parser": "^1.18.3",
-    "cool-ascii-faces": "^1.3.4",
     "ejs": "^2.5.6",
     "express": "^4.16.2",
     "pg": "^7.4.3",

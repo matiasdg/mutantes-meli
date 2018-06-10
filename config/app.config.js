@@ -1,14 +1,16 @@
 var config = {
     default: {
-        port:(process.env.PORT || 8010),
+        port:8080,
         database:{
-          url: process.env.DATABASE_URL
+          url: process.env.DATABASE_URL,
+          ssl: false
         }
     },
     production: {
-        port:(process.env.PORT || 8080),
+        port:process.env.PORT,
         database:{
-            url: process.env.DATABASE_URL
+            url: process.env.DATABASE_URL,
+            ssl: true
         }
     }
 };
