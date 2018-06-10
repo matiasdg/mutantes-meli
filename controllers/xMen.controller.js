@@ -1,11 +1,12 @@
-var xMenCore = require('../core/xMen.core');
+var XMenCoreModule = require('../core/xMen.core');
 var xMenService = require('../services/xMen.service');
 var statService = require('../services/stat.service');
 
 exports.mutant = function(req, res) {
 
   var body = req.body;
-  //validar
+
+  var xMenCore = new XMenCoreModule();
 
   xMenCore.isMutant(body.dna, function(response){
 	

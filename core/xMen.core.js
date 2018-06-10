@@ -1,14 +1,15 @@
 var _ = require('underscore');
 
+function xMen()  {
 
-var xMen = {
+  this.counter = 0;
 
   /***
    * @method isMutant
    * @params {dna, callbackSucces, callbackError}
    * @return boolean
    */
-  isMutant: function(dna, callbackSuccess, callbackError){
+  this.isMutant = function(dna, callbackSuccess, callbackError){
 
 	console.log("DNA requested is: ", dna);
 
@@ -16,14 +17,22 @@ var xMen = {
 	  return callbackSuccess({isMutant:true});
 
 	return callbackSuccess({isMutant:false});
-  },
-  checkHorizontal: function(dna){
-	var self = this;
-	return _.some(dna, function(d){
-	  return self.evaluateValue(d)
-	});
-  },
-  checkVertical: function(dna){
+  };
+  this.checkHorizontal = function(dna){
+	var isMutant = false;
+	for(var i=0; i < dna.length; i++) {
+	  if (this.evaluateValue(dna[i]))
+		this.counter++;
+
+	  if (this.counter == 2) {
+		isMutant = true;
+		break;
+	  }
+	}
+
+	return isMutant;
+  };
+  this.checkVertical = function(dna){
 	var arrayDna = [];
 
 	_.each(dna, function(d){
@@ -31,6 +40,7 @@ var xMen = {
 	});
 
 	var size = arrayDna.length;
+	var isMutant = false;
 	for(var i= 0; i < size; i++){
 	  var chain = "";
 	  for(var x= 0; x < size; x++){
@@ -38,12 +48,17 @@ var xMen = {
 	  }
 
 	  if(this.evaluateValue(chain))
-		return true;
+		this.counter++;
+
+	  if(this.counter == 2){
+		isMutant = true;
+		break;
+	  }
 	}
 
-	return false;
-  },
-  checkOblique: function(dna){
+	return isMutant;
+  };
+  this.checkOblique = function(dna){
 
 	var arrayDna = [];
 
@@ -56,10 +71,11 @@ var xMen = {
 		return true;
 	else
 		return false;
-  },
-  obliqueOnTheRight: function(arrayDna){
+  };
+  this.obliqueOnTheRight = function(arrayDna){
 	var x = 0;
 	var size = arrayDna.length;
+	var isMutant = false;
 	for(var i=size; i > 2; i--){
 	  var chain = "";
 	  for(var y=0, z=x; y < i; y++){
@@ -71,12 +87,18 @@ var xMen = {
 	  x++;
 
 	  if(this.evaluateValue(chain))
-		  return true;
+		this.counter++;
+
+	  if(this.counter == 2){
+		isMutant = true;
+		break;
+	  }
 	}
-	return false;
+	return isMutant;
   },
-  obliqueOnTheLeft: function(arrayDna){
+  this. obliqueOnTheLeft =function(arrayDna){
 	var size = arrayDna.length -1;
+	var isMutant = false;
 	for(var i=1; i < size -1; i++){
 	  var chain = "";
 	  for(var y=i, z=0; y < size +1; y++){
@@ -86,12 +108,17 @@ var xMen = {
 
 	  console.log(chain);
 	  if(this.evaluateValue(chain))
-		return true;
+		this.counter++;
+
+	  if(this.counter == 2) {
+		isMutant = true;
+		break;
+	  }
 	}
 
-	return false;
-  },
-  evaluateValue: function(value){
+	return isMutant;
+  };
+  this.evaluateValue = function(value){
 	return value.match(/([ATCG])\1{3,}/);
   }
 };
