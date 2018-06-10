@@ -15,7 +15,10 @@ var statService = {
 		else
 		  newCountHumanDna++;
 
+
 		newRatio = newCountMutantDna / newCountHumanDna;
+		if(newCountHumanDna == 0)
+			newRatio = 0;
 
 		stat.update({
 		  countMutantDna: newCountMutantDna,
