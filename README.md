@@ -9,6 +9,7 @@
  - [Istanbul](https://istanbul.js.org/)
  - [Heroku](https://www.heroku.com/)
  - [Docker](https://www.docker.com/)
+ - [JMeter](https://jmeter.apache.org/)
 
 
 #### How to run the app locally
@@ -47,3 +48,15 @@ Endpoint for check if a human is mutant or not
 
 Endpoint for get the stats
 [https://mutantes-meli.herokuapp.com/api/xmen/stats](https://mutantes-meli.herokuapp.com/api/xmen/stats)
+
+For stress test purposes, know that Heroku has 10.000 rows limit.
+
+The app was "stressed" by JMeter, getting the following results:
+
+Number of threads: 10.
+Ramp-Up Period: 1s.
+Loop Count: 10.000.
+
+Elapsed Time: 00:02:32.
+
+![](https://github.com/matiasdg/mutantes-meli/blob/master/jmeter.png)

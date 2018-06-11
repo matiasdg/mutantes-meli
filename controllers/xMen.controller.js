@@ -1,6 +1,6 @@
 var XMenCoreModule = require('../core/xMen.core');
+var StatCoreModule = require('../core/Stat.core');
 var xMenService = require('../services/xMen.service');
-var statService = require('../services/stat.service');
 
 exports.mutant = function(req, res) {
 
@@ -14,9 +14,7 @@ exports.mutant = function(req, res) {
 	  res.status(200).send(response);
 	else
 	  res.status(403).send(response);
-
-	statService.update(response.isMutant);
-
+	
 	xMenService.save(body.dna, response.isMutant);
 
   }, function(error){
@@ -27,8 +25,14 @@ exports.mutant = function(req, res) {
 
 exports.stats = function(req, res) {
 
-  statService.getStat(function(response){
-	res.status(200).send(response);
+  var statCore = new StatCoreModule();
+  xMenService.getAll(function(xmenList){
+
+	statCore.calculateStats(xmenList, function(response){
+	  res.status(200).send(response);
+	}, function(){
+	  res.status(500).send(error);
+	});
   }, function(error){
 	res.status(500).send(error);
   });

@@ -9,7 +9,13 @@ var xmenService = {
 	}).catch(error => {
 		console.log("Error on save XMen: ", error);
 	})
-  }
+  },
+  getAll: function(cb, cbError){
+	XMen.findAll().then(function (xmen) {
+	  return cb(xmen);
+	}).catch(function(err) {
+	  return cbError(err);
+	});  }
 
 };
 

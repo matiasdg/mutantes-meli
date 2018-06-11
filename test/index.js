@@ -3,7 +3,7 @@ var request = require('request');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const app = require('../index.js');
-var statModel = require('../models/stat.model');
+var xmenService = require('../services/xMen.service');
 
 chai.use(chaiHttp);
 
@@ -115,23 +115,14 @@ describe('Xmen Mutant Request', () => {
   });
 });
 
-
-describe('Stats Requests NOT OK', () => {
-
-  before(function(done) {
-	statModel.sync({force: true}).
-	then(() => {
-	  done();
-	});
-  });
+describe('Stats Requests OK', () => {
 
   it('Returns a 500 response', (done) => {
 	chai.request(app)
 		.get('/api/xMen/stats')
 		.end((error, response) => {
 		  if (error) done(error);
-		  // Now let's check our response
-		  expect(response).to.have.status(500);
+		  expect(response).to.have.status(200);
 		  done();
 		});
   });
