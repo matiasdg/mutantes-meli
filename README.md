@@ -19,7 +19,7 @@ $ ./run-app.sh
 ```
 
 ###### If you don't have Docker installed or for develop purposes:
-Make sure NPM is installed.
+Make sure NPM and Node (v8 or higher) is installed.
 ```sh
 $ cd mutantes
 $ sh ./run-db.sh
@@ -30,7 +30,7 @@ $ npm run local
 #### How to run tests:
 ```sh
 $ cd mutantes
-$ ./run-db.sh
+$ sh ./run-db.sh
 $ npm install
 $ npm test
 ```
@@ -43,7 +43,7 @@ $ npm test
 The app is hosted on https://mutantes-meli.herokuapp.com
 
 Endpoint for check if a human is mutant or not
-[https://mutantes-meli.herokuapp.com/api/xmen/mutant](https://mutantes-meli.herokuapp.com/api/xmen/mutatant)
+[https://mutantes-meli.herokuapp.com/api/xmen/mutant](https://mutantes-meli.herokuapp.com/api/xmen/mutant)
 
 Endpoint for get the stats
 [https://mutantes-meli.herokuapp.com/api/xmen/stats](https://mutantes-meli.herokuapp.com/api/xmen/stats)

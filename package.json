@@ -1,10 +1,10 @@
 {
   "name": "mutantes",
   "version": "1.0.0",
-  "description": "",
+  "description": "API Mutantes",
   "main": "index.js",
   "scripts": {
-    "test": "DATABASE_URL=postgres://root:root@localhost:5432/mutantes nyc --reporter=text mocha --timeout 15000 --exit",
+    "test": "DATABASE_URL=postgres://root:root@localhost:5432/mutantes nyc mocha --timeout 15000 --exit",
     "start": "NODE_ENV=production node index.js",
     "local": "DATABASE_URL=postgres://root:root@localhost:5432/mutantes node index.js",
     "docker": "DATABASE_URL=postgres://root:root@mutantes-db:5432/mutantes node index.js"
@@ -15,7 +15,6 @@
   "dependencies": {
     "async": "^2.6.0",
     "body-parser": "^1.18.3",
-    "ejs": "^2.5.6",
     "express": "^4.16.2",
     "pg": "^7.4.3",
     "pg-hstore": "^2.3.2",

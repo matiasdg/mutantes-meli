@@ -1,87 +1,138 @@
 var expect  = require('chai').expect;
 var request = require('request');
-var xMen = require('../core/xMen.core');
-var Stat = require('../models/stat.model');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
+const app = require('../index.js');
+var statModel = require('../models/stat.model');
 
 chai.use(chaiHttp);
 
-const app = require('../index.js');
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function wait(done) {
+  console.log('Waiting...');
+  await sleep(3000);
+  done();
+}
+
+before(function (done) {
+  wait(done);
+});
 
 
-describe('Status and content', function() {
+describe('Xmen Mutant Request', () => {
 
+  it('Returns a 200 response', (done) => {
+	var body = {"dna":["TTTTGA","CAGTGC","TTATGT","AGAAGG","CCCCTA","TCACTG"]};
 
-  describe ('xMen Core isMutant', function() {
-	it('should return true', function(){
+	chai.request(app)
+		.post('/api/xMen/mutant')
+		.send(body)
+		.end((error, response) => {
+		  if (error) done(error);
 
-	  var body = {"dna":["ATGCGA","CAGTGC","TTATGT","AGAAGG","CCCCTA","TCACTG"]};
-	  xMen.isMutant(body, function(response){
-
-		expect(response).assert(true);
-
-	  });
-	});
-
-	it('should return false', function(){
-
-	  var body = {"dna":["ATGCGA","CAGTGC","TTATGT","AGAAGG","CCCCTA","TCACTG"]};
-	  xMen.isMutant(body, function(response){
-
-		expect(response).assert(false);
-
-	  });
-	});
+		  expect(response).to.have.status(200);
+		  done();
+		});
   });
 
 
-  describe('Stats', () => {
+  it('Returns a 200 response', (done) => {
+	var body = {"dna":["TTTTGA","CTGTGC","TATTGT","AGATGG","CCTCTA","TCACTG"]};
 
-	it('Returns a 200 response', (done) => {
+	chai.request(app)
+		.post('/api/xMen/mutant')
+		.send(body)
+		.end((error, response) => {
+		  if (error) done(error);
 
-	  chai.request(app)
-		  .get('/api/xMen/stats')
-		  .end((error, response) => {
-			if (error) done(error);
-			// Now let's check our response
-			expect(response).to.have.status(200);
-			done();
-		  });
-	});
+		  expect(response).to.have.status(200);
+		  done();
+		});
+  });
+
+  it('Returns a 200 response', (done) => {
+	var body = {"dna":[
+	  "TTTTATTC",
+	  "CTCCACCC",
+	  "TTAAGTTC",
+	  "CGATACGG",
+	  "CCCATAAC",
+	  "ACACTGGC",
+	  "AAACCGGG",
+	  "ACACTGGC"]};
+
+	chai.request(app)
+		.post('/api/xMen/mutant')
+		.send(body)
+		.end((error, response) => {
+		  if (error) done(error);
+
+		  expect(response).to.have.status(200);
+		  done();
+		});
   });
 
 
-  describe('Xmen Mutant Request', () => {
+  it('Should returns a 403 response', (done) => {
+	var body = {"dna":[
+	  "TTATTC",
+	  "CTGTAC",
+	  "TTXAGT",
+	  "CGATGG",
+	  "CCCTTA",
+	  "ACACTG"]};
 
-	it('Returns a 200 response', (done) => {
-	  var body = {"dna":["ATGCGA","CAGTGC","TTATGT","AGAAGG","CCCCTA","TCACTG"]};
+	chai.request(app)
+		.post('/api/xMen/mutant')
+		.send(body)
+		.end((error, response) => {
+		  if (error) done(error);
+		  expect(response).to.have.status(403);
+		  done();
+		});
+  });
 
-	  chai.request(app)
-		  .post('/api/xMen/mutant')
-		  .send(body)
-		  .end((error, response) => {
-			if (error) done(error);
-			// Now let's check our response
-			expect(response).to.have.status(200);
-			done();
-		  });
-	});
+  it('Should returns a 500 response', (done) => {
+	var body = {"adn":[
+	  "TTATTC",
+	  "CTGTAC",
+	  "TTXAGT",
+	  "CGATGG",
+	  "CCCTTA",
+	  "ACACTG"]};
+
+	chai.request(app)
+		.post('/api/xMen/mutant')
+		.send(body)
+		.end((error, response) => {
+		  if (error) done(error);
+		  expect(response).to.have.status(500);
+		  done();
+		});
+  });
+});
 
 
-	it('Returns a 403 response', (done) => {
-	  var body = {"dna":["ATGCGA","CAGTGC","TTATGT","AGAAGG","CCTTTA","TCACTG"]};
+describe('Stats Requests NOT OK', () => {
 
-	  chai.request(app)
-		  .post('/api/xMen/mutant')
-		  .send(body)
-		  .end((error, response) => {
-			if (error) done(error);
-			// Now let's check our response
-			expect(response).to.have.status(403);
-			done();
-		  });
+  before(function(done) {
+	statModel.sync({force: true}).
+	then(() => {
+	  done();
 	});
   });
 
+  it('Returns a 500 response', (done) => {
+	chai.request(app)
+		.get('/api/xMen/stats')
+		.end((error, response) => {
+		  if (error) done(error);
+		  // Now let's check our response
+		  expect(response).to.have.status(500);
+		  done();
+		});
+  });
 });

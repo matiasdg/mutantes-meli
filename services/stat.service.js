@@ -3,7 +3,6 @@ var Stat = require('../models/stat.model');
 var statService = {
   
   update: function(isMutant){
-	
 	Stat.findOne().then(stat => {
 	  if (stat) {
 		var newCountMutantDna = stat.countMutantDna;
@@ -14,8 +13,7 @@ var statService = {
 		  newCountMutantDna++;
 		else
 		  newCountHumanDna++;
-
-
+		
 		newRatio = newCountMutantDna / newCountHumanDna;
 		if(newCountHumanDna == 0)
 			newRatio = 0;

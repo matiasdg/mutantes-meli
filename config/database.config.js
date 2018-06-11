@@ -7,8 +7,9 @@ var sequelize = new Sequelize(config.database.url, {
     ssl: config.database.ssl
   },
   pool:{
-    acquire:50000,
-    max: 6
+    acquire:100000,
+    max: 10,
+    idle: 50000
   }
 }
 );

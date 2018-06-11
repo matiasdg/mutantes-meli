@@ -8,7 +8,7 @@ app.use(bodyParser.json());
 app.use('/api', api);
 
 app.listen(port, function(){
-  console.log('Servidor corriendo en el puerto: ' + port + '. Ambiente: ' + (process.env.NODE_ENV || 'default'));
+  console.log('Server running at: ' + port + '. Envinronment: ' + (process.env.NODE_ENV || 'default'));
 });
 
 module.exports = app;

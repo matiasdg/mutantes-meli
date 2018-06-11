@@ -12,6 +12,8 @@ function xMen()  {
   this.isMutant = function(dna, callbackSuccess, callbackError){
 
 	console.log("DNA requested is: ", dna);
+	if(dna == undefined)
+		return callbackError({error:"Value dna does not exist"});
 
 	if(this.checkHorizontal(dna) || this.checkVertical(dna) || this.checkOblique(dna))
 	  return callbackSuccess({isMutant:true});
@@ -83,7 +85,6 @@ function xMen()  {
 		z++;
 	  }
 
-	  console.log(chain);
 	  x++;
 
 	  if(this.evaluateValue(chain))
@@ -106,7 +107,6 @@ function xMen()  {
 		z++;
 	  }
 
-	  console.log(chain);
 	  if(this.evaluateValue(chain))
 		this.counter++;
 

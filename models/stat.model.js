@@ -1,6 +1,7 @@
 var sequelize = require('../config/database.config');
 const Sequelize = require('sequelize');
 
+
 const Stat = sequelize.define('stat', {
 	countMutantDna: {
 	  type: Sequelize.INTEGER
@@ -14,7 +15,7 @@ const Stat = sequelize.define('stat', {
 });
 
 Stat.sync({force: true}).then(() => {
-  // Table created
+  console.log("Table Stats created");
   return Stat.create({
 	countMutantDna: 0,
 	countHumanDna: 0,

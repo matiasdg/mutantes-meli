@@ -11,8 +11,7 @@ const XMen = sequelize.define('xmen', {
 });
 
 XMen.sync({force: true}).then(() => {
- // Table created
-
+  console.log("Table XMens created");
  });
 
 module.exports = XMen;
