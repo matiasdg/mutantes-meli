@@ -15,22 +15,21 @@
 #### How to run the app locally
 Make sure Docker is installed.
 ```sh
-$ cd mutantes
-$ ./run-app.sh
+$ sh ./run-app.sh
 ```
 
-###### If you don't have Docker installed or for develop purposes:
+##### If you don't have Docker installed or for develop purposes:
 Make sure NPM and Node (v8 or higher) is installed.
 ```sh
-$ cd mutantes
 $ sh ./run-db.sh
 $ npm install
 $ npm run local
 ```
 
+The server will be running at port 8080
+
 #### How to run tests:
 ```sh
-$ cd mutantes
 $ sh ./run-db.sh
 $ npm install
 $ npm test
