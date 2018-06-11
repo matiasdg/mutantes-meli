@@ -8,8 +8,7 @@ var sequelize = new Sequelize(config.database.url, {
   },
   pool:{
     acquire:100000,
-    max: 10,
-    idle: 50000
+    max: 6
   }
 }
 );

@@ -43,10 +43,10 @@ $ npm test
 
 The app is hosted on https://mutantes-meli.herokuapp.com
 
-Endpoint for check if a human is mutant or not
+Endpoint for check if a human is mutant or not:
 [https://mutantes-meli.herokuapp.com/api/xmen/mutant](https://mutantes-meli.herokuapp.com/api/xmen/mutant)
 
-Endpoint for get the stats
+Endpoint for get the stats:
 [https://mutantes-meli.herokuapp.com/api/xmen/stats](https://mutantes-meli.herokuapp.com/api/xmen/stats)
 
 For stress test purposes, know that Heroku has 10.000 rows limit.
@@ -54,7 +54,9 @@ For stress test purposes, know that Heroku has 10.000 rows limit.
 The app was "stressed" by JMeter, getting the following results:
 
 Number of threads: 10.
+
 Ramp-Up Period: 1s.
+
 Loop Count: 10.000.
 
 Elapsed Time: 00:02:32.
